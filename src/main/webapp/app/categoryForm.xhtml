@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"> 
+
+<ui:composition template="/shared/crud-template.xhtml">
+	<ui:define name="body">
+		<div>
+		    <div class ="container min-container">      
+		    <h2 class="basic-title">Add</h2>
+		      <h:form prependId="false" styleClass="well" pt:role="form">
+		      			      	    <div class="form-group">
+  	        <div class="form-group">
+	          <label for="category-name">name</label>
+	          <div class="input-group">
+		      	<span class="input-group-addon"><i class="glyphicon glyphicon-unchecked"></i></span><input type='text' jsf:id='category-name' value='#{categoryController.category.name}'/>
+				<h:message for='category-name'/>
+
+          	  </div>
+            </div>
+        <div class="form-group">
+          <label for="category-description">description</label>
+          <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-unchecked"></i></span><input type='text' jsf:id='category-description' value='#{categoryController.category.description}'/>
+<h:message for='category-description'/>
+
+          </div>
+        </div>
+        </div>
+		        <button type="submit" jsf:action="#{categoryController.save}" class="btn btn-primary">Submit</button>
+		      </h:form>	
+		    </div>
+		  </div>
+	</ui:define>
+</ui:composition>
+</html>
