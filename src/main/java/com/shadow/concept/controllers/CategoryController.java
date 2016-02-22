@@ -1,35 +1,33 @@
 package com.shadow.concept.controllers;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.inject.Model;
+import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.apache.deltaspike.jpa.api.transaction.Transactional;
 
 import com.shadow.concept.daos.CategoryDao;
 import com.shadow.concept.models.Category;
 
-@Model
+@Named
+@ViewScoped
 @Transactional
-public class CategoryController {
+public class CategoryController implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Inject
 	private CategoryDao categoryDao;
 	private Category category = new Category();
 	private List<Category> categoryList = new ArrayList<>();
-
-	private Integer idToEdit;
-
-	public Integer getIdToEdit() {
-		return idToEdit;
-	}
-
-	public void setIdToEdit(Integer idToEdit) {
-		this.idToEdit = idToEdit;
-	}
 
 	public List<Category> getCategoryList() {
 		return this.categoryList;
@@ -45,15 +43,23 @@ public class CategoryController {
 
 	@PostConstruct
 	private void postConstruct() {
-		categoryList.addAll(categoryDao.all());
+		Object object = FacesContext.getCurrentInstance().getExternalContext().getFlash().get("entity");
+		if (object != null)
+			category = (Category) object;
+		else 
+			categoryList.addAll(categoryDao.all());
 	}
 
-	public void loadDetails() {
-		this.category = categoryDao.findById(idToEdit);
+	public String show(Category c){
+		FacesContext.getCurrentInstance().getExternalContext().getFlash().put("entity", c);
+		return "/app/categoryForm.xhtml?faces-redirect=true";
 	}
 
 	public String save() {
-		categoryDao.save(category);
+		if (category.getId() == null)
+			categoryDao.save(category);
+		else 
+			categoryDao.update(category);
 		return "/app/categoryList.xhtml?faces-redirect=true";
 	}
 

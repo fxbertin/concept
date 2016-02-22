@@ -1,5 +1,6 @@
 package com.shadow.concept.daos;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -7,8 +8,12 @@ import javax.persistence.EntityManager;
 
 import com.shadow.concept.models.Category;
 
-public class CategoryDao {
+public class CategoryDao implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Inject
 	private EntityManager manager;
 
