@@ -47,7 +47,7 @@ public class CategoryController implements Serializable {
 		if (object != null)
 			category = (Category) object;
 		else 
-			categoryList.addAll(categoryDao.all());
+			categoryList.addAll(categoryDao.findAll());
 	}
 
 	public String show(Category c){
@@ -70,8 +70,8 @@ public class CategoryController implements Serializable {
 	}
 
 	public String remove(Integer id) {
-		Category category = categoryDao.findById(id);
-		categoryDao.remove(category);
+		Category category = categoryDao.getById(id);
+		categoryDao.delete(category);
 		return "/app/categoryList.xhtml?faces-redirect=true";
 	}
 
