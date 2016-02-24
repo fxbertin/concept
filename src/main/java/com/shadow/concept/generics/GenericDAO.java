@@ -7,12 +7,12 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 @SuppressWarnings("unchecked")
-public class GenericDAO<PK, T> {
+public abstract class GenericDAO<T extends GenericEntity> {
 	@Inject
 	private EntityManager entityManager;
 
-	public T getById(PK pk) {
-		return (T) entityManager.find(getTypeClass(), pk);
+	public T getById(Long id) {
+		return (T) entityManager.find(getTypeClass(), id);
 	}
 
 	public void save(T entity) {
@@ -33,7 +33,7 @@ public class GenericDAO<PK, T> {
 
 	private Class<?> getTypeClass() {
 		Class<?> clazz = (Class<?>) ((ParameterizedType) this.getClass().getGenericSuperclass())
-				.getActualTypeArguments()[1];
+				.getActualTypeArguments()[0];
 		return clazz;
 	}
 }

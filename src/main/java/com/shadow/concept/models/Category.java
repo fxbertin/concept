@@ -1,26 +1,19 @@
 package com.shadow.concept.models;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import org.hibernate.validator.constraints.NotBlank;
+
+import com.shadow.concept.generics.GenericEntity;
 
 @Entity
-public class Category {
+public class Category extends GenericEntity {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private static final long serialVersionUID = 1L;
+	@NotBlank
 	private String name;
+	@NotBlank
 	private String description;
-
-	public Integer getId() {
-		return this.id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	public String getName() {
 		return this.name;

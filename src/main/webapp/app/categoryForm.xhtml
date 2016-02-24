@@ -9,32 +9,41 @@
 
 <ui:composition template="/shared/crud-template.xhtml">
 	<ui:define name="body">
-		<div>
-		    <div class ="container min-container">      
-		    <h2 class="basic-title">Add</h2>
-		      <h:form prependId="false" styleClass="well" pt:role="form">
-		      			      	    <div class="form-group">
-  	        <div class="form-group">
-	          <label for="category-name">name</label>
-	          <div class="input-group">
-		      	<span class="input-group-addon"><i class="glyphicon glyphicon-unchecked"></i></span><input type='text' jsf:id='category-name' value='#{categoryController.category.name}'/>
-				<h:message for='category-name'/>
-
-          	  </div>
-            </div>
-        <div class="form-group">
-          <label for="category-description">description</label>
-          <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-unchecked"></i></span><input type='text' jsf:id='category-description' value='#{categoryController.category.description}'/>
-<h:message for='category-description'/>
-
-          </div>
-        </div>
-        </div>
-		        <button type="submit" jsf:action="#{categoryController.save}" class="btn btn-primary">Submit</button>
-		      </h:form>	
-		    </div>
-		  </div>
-	</ui:define>
+		<h:form>
+			<div class="ui-fluid">
+				<div class="ui-grid ui-grid-responsive">
+					<div class="ui-grid-row">
+				        <div class="ui-grid-col-12">
+				        	<p:messages />
+				        </div>
+				    </div>    
+				    <div class="ui-grid-row">
+				        <div class="ui-grid-col-12">
+							<p:outputLabel for="name" value="Name"/> <br/>
+			       	 		<p:inputText id="name" value="#{categoryController.entidade.name}" />
+						</div>
+				    </div>
+		
+				    <div class="ui-grid-row">
+				        <div class="ui-grid-col-12">
+							<p:outputLabel for="desc" value="Description"/> <br />
+			        		<p:inputText id="desc" value="#{categoryController.entidade.description}" />
+						</div>
+				    </div>
+				    
+				    <div class="ui-grid-row">
+				        <div class="ui-grid-col-1">
+							<p:commandButton value="Salvar" 
+											 action="#{categoryController.save()}"
+											 update="@form"/> 
+						</div>
+						<div class="ui-grid-col-1">
+							<p:button value="Cancelar" outcome="/app/categoryList.xhtml?faces-redirect=true"/> 
+						</div>
+				    </div>				    
+				</div>
+			</div>	
+		</h:form>	
+	</ui:define> 
 </ui:composition>
 </html>
