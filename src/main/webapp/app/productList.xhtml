@@ -8,7 +8,7 @@
 		<ui:define name="body">
 			<a href="#{request.contextPath}/app/categoryForm.xhtml">Adicionar</a>
 			<h:form>
-				<p:dataTable value="#{categoryController.players}" 
+				<p:dataTable value="#{productController.players}" 
 							 var="r" 
 							 id="tabela"
 							 reflow="true"
@@ -18,7 +18,7 @@
 							 lazy="true"
 							 rowKey="#{r.id}"
 							 selectionMode="single"
-							 selection="#{categoryController.entidade}"
+							 selection="#{productController.entidade}"
 							 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                 			 rowsPerPageTemplate="5,10,15"
                 			 >
@@ -29,8 +29,8 @@
 				        <p:columnToggler datasource="tabela" trigger="toggler" />
 					  </f:facet>		 
 					<p:column >
-						<p:commandLink action="#{categoryController.show(r)}">Alterar</p:commandLink>
-						<p:commandLink action="#{categoryController.remove(r.id)}">
+						<p:commandLink action="#{productController.show(r)}">Alterar</p:commandLink>
+						<p:commandLink action="#{productController.remove(r.id)}">
 							Remove
 							 <p:confirm header="Confirmação" message="Deseja prosseguir?" icon="ui-icon-alert" />
 						</p:commandLink>
@@ -38,9 +38,9 @@
 					<p:column headerText="Name">
 						#{r.name}
 					</p:column>
-					<p:column headerText="Description">
-						#{r.description}
-					</p:column>
+<!-- 					<p:column headerText="Description"> -->
+<!-- 						#{r.description} -->
+<!-- 					</p:column> -->
 
 				</p:dataTable> 
 			</h:form>

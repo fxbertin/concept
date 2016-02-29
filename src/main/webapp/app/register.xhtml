@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:o="http://omnifaces.org/ui"> 
+
+	<ui:composition template="/shared/crud-template.xhtml">
+		<ui:define name="body">
+			<o:importConstants type="com.shadow.concepts.enums.Role" />
+			 
+			    <h2>Novo usuário</h2>
+			    <h:form id="register">
+			    	<div class="ui-fluid">
+			    		<div class="ui-grid ui-grid-responsive">
+							
+							<div class="ui-grid-row">
+						        <div class="ui-grid-col-12">
+						        	<p:messages />
+						        </div>
+						    </div>
+						    
+						    <div class="ui-grid-row">
+						        <div class="ui-grid-col-12">
+						        	<p:outputLabel for="name" value="Username:" />
+						            <p:inputText id="name" 
+						            			 value="#{register.user.username}" 
+						            			 required="true"/>
+						        </div>
+						    </div>
+						    
+						    <div class="ui-grid-row">    
+						        <div class="ui-grid-col-12">
+						            <p:outputLabel for="pass" value="Password:" />
+						            <p:password id="pass" 
+						            		    value="#{register.user.password}" 
+						            		    required="true" 
+						            		    redisplay="true"/>			        
+						        </div>
+						    </div>
+						        
+						    <div class="ui-grid-row">	
+						    	<div class="ui-grid-col-12">
+									<p:outputLabel for="roles" value="Roles:" />
+						            <p:selectManyCheckbox id="roles" value="#{register.user.roles}" required="true"
+						                layout="pageDirection" converter="omnifaces.GenericEnumConverter">
+						                <f:selectItems value="#{Role}" />
+						            </p:selectManyCheckbox>						    	
+						    	</div>
+						    </div>
+						    
+						    <div class="ui-grid-row">	
+						    	<div class="ui-grid-col-1">
+									<p:commandButton value="Register" action="#{register.submit}" >
+						                <f:ajax execute="@form" render="@form" />
+						            </p:commandButton>				    	
+						    	</div>
+						    	<div class="ui-grid-col-1">
+									<p:button value="Cancelar" outcome="/app/categoryList.xhtml?faces-redirect=true"/> 
+								</div>
+						    </div>
+						</div>        
+			    	</div>
+			  
+			    </h:form>
+		</ui:define>
+	</ui:composition>
+</html>

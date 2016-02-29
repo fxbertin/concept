@@ -15,18 +15,20 @@
 </h:head>
 <h:body>
 	
-		<b:navBar brand="Whatever" brandHref="#">
-		    <b:navbarLinks>
-		        <b:navLink value="Home" href="#{request.contextPath}/app/index.xhtml"/>
-		   
-		        <b:dropMenu value="Cadastro">
-		            <b:navLink value="Usuário" href="#{request.contextPath}/app/usuarioList.xhtml"/>
-		            <b:navLink value="Entidade" href="#{request.contextPath}/app/entidadeList.xhtml"/>
-		            <b:navLink value="Category" href="#{request.contextPath}/app/categoryList.xhtml"/>
-		       
-		        </b:dropMenu>
-		    </b:navbarLinks>
-		</b:navBar>
+        <h:form>
+			<b:navBar brand="Whatever" brandHref="#">
+			    <b:navbarLinks>
+			        <b:navLink value="Home" href="#{request.contextPath}/app/index.xhtml"/>
+			   
+			        <b:dropMenu value="Cadastro">
+			            <b:navLink value="Usuário" href="#{request.contextPath}/app/register.xhtml"/>
+			            <b:navLink value="Entidade" href="#{request.contextPath}/app/entidadeList.xhtml"/>
+			            <b:navLink value="Category" href="#{request.contextPath}/app/categoryList.xhtml"/>
+			       			<b:navCommandLink value="Logout" action="#{logout.submit}"/>
+			        </b:dropMenu>
+			    </b:navbarLinks>
+			</b:navBar>
+   		</h:form>	
 	
 		<b:container>
             <b:row>

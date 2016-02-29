@@ -9,34 +9,25 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.shadow.concept.generics.GenericEntity;
 import com.shadow.concepts.enums.Role;
 
 @Entity
-@Table(name="users")
-@NamedQueries({
-		@NamedQuery(name = "User.find", query = "SELECT u FROM User u WHERE u.username = :username AND u.password = :password"),
-		@NamedQuery(name = "User.list", query = "SELECT u FROM User u") })
-public class User {
+@Table(name = "users")
+public class User extends GenericEntity {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private static final long serialVersionUID = 1L;
 
 	@NotNull
 	@Column(unique = true)
 	private String username;
 
 	@NotNull
-	@Column(name="psw")
+	@Column(name = "psw")
 	private String password;
 
 	@ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
@@ -44,14 +35,6 @@ public class User {
 	@CollectionTable(name = "UserRoles", joinColumns = { @JoinColumn(name = "userId") })
 	@Column(name = "role")
 	private List<Role> roles;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getUsername() {
 		return username;

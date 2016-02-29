@@ -10,26 +10,26 @@ import org.primefaces.model.LazyDataModel;
 
 import com.shadow.concept.generics.GenericController;
 import com.shadow.concept.generics.GenericLazyDataModel;
-import com.shadow.concept.models.Category;
+import com.shadow.concept.models.Product;
 
 @Named
 @ViewScoped
 @Transactional
-public class CategoryController extends GenericController<Category> implements Serializable {
+public class ProductController extends GenericController<Product> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private LazyDataModel<Category> players;
+	private LazyDataModel<Product> players;
 
-	public LazyDataModel<Category> getPlayers() {
+	public LazyDataModel<Product> getPlayers() {
 		if (players == null) {
-			players = new GenericLazyDataModel<Category>(dao,"description,name");
+			players = new GenericLazyDataModel<Product>(dao, "name,category");
 		}
 
 		return players;
 	}
 
-	public void setPlayers(LazyDataModel<Category> players) {
+	public void setPlayers(LazyDataModel<Product> players) {
 		this.players = players;
 	}
 

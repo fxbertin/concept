@@ -1,38 +1,42 @@
 package com.shadow.concept.controllers;
 
-import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
+import javax.transaction.Transactional;
 
 import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.omnifaces.util.Messages;
 
+import com.shadow.concept.daos.UserDao;
 import com.shadow.concept.models.User;
-import com.shadow.concept.service.UserService;
 
 @Named
 @RequestScoped
+@Transactional
 public class Register {
 
 	private User user;
 
-	@EJB
-	private UserService service;
+	private UserDao dao;
+	
+	public Register() {
+	}
 
-	@PostConstruct
-	public void init() {
-		user = new User();
+	@Inject
+	public Register(User user, UserDao dao) {
+		this.user = user;
+		this.dao = dao;
 	}
 
 	public void submit() {
 		try {
 			user.setPassword(new Sha256Hash(user.getPassword()).toHex());
-		    service.create(user);
-			Messages.addGlobalInfo("Registration suceed, new user ID is: {0}", user.getId());
+			dao.save(user);
+			Messages.addGlobalInfo("Usuário cadastrado com sucesso.");
 		} catch (RuntimeException e) {
-			Messages.addGlobalError("Registration failed: {0}", e.getMessage());
-			e.printStackTrace(); // TODO: logger.
+			Messages.addGlobalError("Falha ao salvar: {0}", e.getMessage());
+			e.printStackTrace();
 		}
 	}
 
