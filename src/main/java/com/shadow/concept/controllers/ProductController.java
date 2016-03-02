@@ -23,7 +23,7 @@ public class ProductController extends GenericController<Product> implements Ser
 
 	public LazyDataModel<Product> getPlayers() {
 		if (players == null) {
-			players = new GenericLazyDataModel<Product>(dao, "name,category");
+			players = new GenericLazyDataModel<Product>(dao, "id,name,category.name");
 		}
 
 		return players;

@@ -31,9 +31,7 @@ public abstract class GenericController<T extends GenericEntity> implements Seri
 		Object object = FacesContext.getCurrentInstance().getExternalContext().getFlash().get("entity");
 		if (object != null)
 			setEntidade((T) object);
-		else
-			getList().addAll(dao.findAll());
-
+		
 		setUrls();
 	}
 
