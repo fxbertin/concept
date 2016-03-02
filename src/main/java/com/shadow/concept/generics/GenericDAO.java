@@ -10,6 +10,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Selection;
@@ -95,11 +97,11 @@ public abstract class GenericDAO<T extends GenericEntity> implements Serializabl
 	private Selection<?> montaJoin(String campoJoin, Root<T> r) {
 
 		String[] split = campoJoin.split("\\.");
-		Path<Object> p = r.get(split[0]);
-
+		Join<Object, Object> p = r.join(split[0], JoinType.LEFT);
+		
 		if (split.length > 1) {
 			for (int i = 1; i < split.length - 1; i++) {
-				p = p.get(split[i]);
+				p = p.join(split[i], JoinType.LEFT);
 			}
 		}
 		return p.get(split[split.length - 1]);
