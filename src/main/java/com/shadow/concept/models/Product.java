@@ -13,9 +13,6 @@ public class Product extends GenericEntity {
 	
 	@ManyToOne
 	private Category category;
-	
-	@ManyToOne
-	private Category category2;
 
 	public String getName() {
 		return name;
@@ -31,14 +28,6 @@ public class Product extends GenericEntity {
 
 	public void setCategory(Category category) {
 		this.category = category;
-	}
-
-	public Category getCategory2() {
-		return category2;
-	}
-
-	public void setCategory2(Category category2) {
-		this.category2 = category2;
 	}
 
 }

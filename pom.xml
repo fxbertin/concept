@@ -104,6 +104,12 @@
 			<version>4.3.11.Final</version>
 		</dependency>
 
+		<dependency>
+			<groupId>tools.devnull</groupId>
+			<artifactId>trugger</artifactId>
+			<version>5.1.1</version>
+		</dependency>
+
 
 	</dependencies>
 

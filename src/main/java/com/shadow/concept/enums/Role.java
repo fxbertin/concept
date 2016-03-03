@@ -1,4 +1,4 @@
-package com.shadow.concepts.enums;
+package com.shadow.concept.enums;
 
 public enum Role {
 

@@ -41,8 +41,8 @@ public abstract class GenericController<T extends GenericEntity> implements Seri
 		tableUrl = String.format("/app/%sList.xhtml?faces-redirect=true", className);
 	}
 
-	public String show(Category c) {
-		FacesContext.getCurrentInstance().getExternalContext().getFlash().put("entity", c);
+	public String show(T t) {
+		FacesContext.getCurrentInstance().getExternalContext().getFlash().put("entity", t);
 		return formUrl;
 	}
 

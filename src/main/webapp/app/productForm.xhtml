@@ -20,27 +20,34 @@
 				    <div class="ui-grid-row">
 				        <div class="ui-grid-col-12">
 							<p:outputLabel for="name" value="Name"/> <br/>
-			       	 		<p:inputText id="name" value="#{categoryController.entidade.name}" />
+			       	 		<p:inputText id="name" value="#{productController.entidade.name}" />
 						</div>
 				    </div>
 		
 				    <div class="ui-grid-row">
 				        <div class="ui-grid-col-12">
-							<p:outputLabel for="desc" value="Description"/> <br />
-			        		<p:inputText id="desc" value="#{categoryController.entidade.description}" />
+							<p:outputLabel for="category" value="Category"/> <br />
+			        		<p:selectOneMenu id="category"
+											 value="#{productController.entidade.category}">
+								<f:converter converterId="entityConverter"/>
+								<f:selectItems value="#{productController.categories}"
+											   var="x"
+											   itemValue="#{x}"
+											   itemLabel="#{x.name}"	/>
+							</p:selectOneMenu>
 						</div>
 				    </div>
 				    
 				    <div class="ui-grid-row">
 				        <div class="ui-grid-col-1">
 							<p:commandButton value="Salvar" 
-											 action="#{categoryController.save()}"
+											 action="#{productController.save()}"
 											 update="@form"
 											 icon="fa fa-fw fa-check"/> 
 						</div>
 						<div class="ui-grid-col-1">
 							<p:button value="Cancelar" 
-									  outcome="/app/categoryList.xhtml?faces-redirect=true"
+									  outcome="/app/productList.xhtml?faces-redirect=true"
 									  icon="fa fa-fw fa-close"/> 
 						</div>
 				    </div>				    

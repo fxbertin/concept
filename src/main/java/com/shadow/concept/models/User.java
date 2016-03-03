@@ -13,8 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.shadow.concept.enums.Role;
 import com.shadow.concept.generics.GenericEntity;
-import com.shadow.concepts.enums.Role;
 
 @Entity
 @Table(name = "users")
