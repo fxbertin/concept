@@ -3,12 +3,21 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:p="http://primefaces.org/ui">
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:b="http://bootsfaces.net/ui">
 	<ui:composition template="/shared/crud-template.xhtml">
 		<ui:define name="body">
-			<a href="#{request.contextPath}/app/categoryForm.xhtml">Adicionar</a>
+			<b:button look="success" 
+					  title="#{msg.add}" 
+					  value="" 
+					  outcome="/app/productForm.xhtml" 
+					  iconAwesome="fa-plus"
+					  size="xs"
+					  />
+			
 			<h:form>
 				<p:dataTable value="#{productController.players}" 
+							 selection="#{productController.entidade}"
 							 var="r" 
 							 id="tabela"
 							 reflow="true"
@@ -18,29 +27,33 @@
 							 lazy="true"
 							 rowKey="#{r.id}"
 							 selectionMode="single"
-							 selection="#{productController.entidade}"
-							 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							 paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}"
                 			 rowsPerPageTemplate="5,10,15"
+                			 resizableColumns="true"
                 			 >
-                	  <f:facet name="header">
-					        
-					 
-				        <p:commandButton id="toggler" type="button" value="Columns" style="float:right" icon="ui-icon-calculator" />
-				        <p:columnToggler datasource="tabela" trigger="toggler" />
-					  </f:facet>		 
-					<p:column >
-						<p:commandLink action="#{productController.show(r)}">Alterar</p:commandLink>
-						<p:commandLink action="#{productController.remove(r.id)}">
-							Remove
+          		 
+					<p:column width="70">
+						<p:commandLink action="#{productController.show(r)}" 
+										 title="#{msg.alt}" >
+							<b:iconAwesome name="fa-edit" size="lg"/>
+						</p:commandLink>				 
+						<p:commandLink action="#{productController.remove(r.id)}"
+									   title="#{msg.del}"
+									   style="margin-left:5px"> 
+							 <b:iconAwesome name="fa-trash" size="lg"/>
 							 <p:confirm header="Confirmação" message="Deseja prosseguir?" icon="ui-icon-alert" />
 						</p:commandLink>
+					</p:column>
+					<p:column headerText="ID"
+							  width="70">
+						#{r.id}
 					</p:column>
 					<p:column headerText="Name">
 						#{r.name}
 					</p:column>
-<!-- 					<p:column headerText="Description"> -->
-<!-- 						#{r.description} -->
-<!-- 					</p:column> -->
+					<p:column headerText="Category">
+						#{r.category.name}
+					</p:column>
 
 				</p:dataTable> 
 			</h:form>

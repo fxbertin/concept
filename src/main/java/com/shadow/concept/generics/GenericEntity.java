@@ -10,7 +10,7 @@ import javax.persistence.Version;
 
 @MappedSuperclass
 public abstract class GenericEntity implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -18,7 +18,7 @@ public abstract class GenericEntity implements Serializable {
 	protected Long id;
 
 	@Version
-	protected Long version;
+	private Long version;
 
 	public Long getId() {
 		return id;
@@ -26,6 +26,10 @@ public abstract class GenericEntity implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
 	}
 
 	public Long getVersion() {
@@ -37,7 +41,7 @@ public abstract class GenericEntity implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((version == null) ? 0 : version.hashCode());
+		result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());
 		return result;
 	}
 
@@ -55,13 +59,12 @@ public abstract class GenericEntity implements Serializable {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (version == null) {
-			if (other.version != null)
+		if (getVersion() == null) {
+			if (other.getVersion() != null)
 				return false;
-		} else if (!version.equals(other.version))
+		} else if (!getVersion().equals(other.getVersion()))
 			return false;
 		return true;
 	}
 
-	
 }

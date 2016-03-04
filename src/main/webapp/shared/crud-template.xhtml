@@ -16,10 +16,8 @@
 <h:body>
 	
         <h:form>
-			<b:navBar brand="Whatever" brandHref="#">
+			<b:navBar brand="Whatever" brandHref="#{request.contextPath}/app/index.xhtml">
 			    <b:navbarLinks>
-			        <b:navLink value="Home" href="#{request.contextPath}/app/index.xhtml"/>
-			   
 			        <b:dropMenu value="Cadastro">
 			            <b:navLink value="Usuário" href="#{request.contextPath}/app/register.xhtml"/>
 			            <b:navLink value="Entidade" href="#{request.contextPath}/app/entidadeList.xhtml"/>
@@ -39,9 +37,9 @@
             </b:row>
         </b:container>
         
-        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-	        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-	        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" closeOnEscape="true">
+	        <p:commandButton value="#{msg.sim}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+	        <p:commandButton value="#{msg.nao}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
     	</p:confirmDialog>
 	
 </h:body>
