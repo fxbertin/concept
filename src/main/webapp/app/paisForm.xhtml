@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"> 
+
+<ui:composition template="/shared/crud-template.xhtml">
+	<ui:define name="body">
+		<h:form>
+			<div class="ui-fluid">
+				<div class="ui-grid ui-grid-responsive">
+					<div class="ui-grid-row">
+				        <div class="ui-grid-col-12">
+				        	<p:messages />
+				        </div>
+				    </div>    
+				    <div class="ui-grid-row">
+				        <div class="ui-grid-col-12">
+							<p:outputLabel for="name" value="Name"/> <br/>
+			       	 		<p:inputText id="name" value="#{paisController.entidade.nome}" />
+						</div>
+				    </div>
+						 
+				    <div class="ui-grid-row">
+				        <div class="ui-grid-col-1">
+							<p:commandButton value="#{msg.salvar}" 
+											 action="#{paisController.save()}"
+											 update="@form"
+											 icon="fa fa-fw fa-check"/> 
+						</div>
+						<div class="ui-grid-col-1">
+							<p:button value="#{msg.cancelar}"
+									  outcome="/app/paisList.xhtml?faces-redirect=true"
+									  icon="fa fa-fw fa-close"/> 
+						</div>
+				    </div>				    
+				</div>
+			</div>	
+		</h:form>	
+	</ui:define> 
+</ui:composition>
+</html>

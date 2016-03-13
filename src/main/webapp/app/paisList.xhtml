@@ -10,13 +10,13 @@
             <b:button look="success" 
                       title="#{msg.add}" 
                       value="" 
-                      outcome="/app/categoryForm.xhtml" 
+                      outcome="/app/paisForm.xhtml" 
                       iconAwesome="fa-plus"
                       size="xs"
                       />
             <h:form>
-                <p:dataTable value="#{categoryController.list}" 
-                             selection="#{categoryController.entidade}"
+                <p:dataTable value="#{paisController.list}" 
+                             selection="#{paisController.entidade}"
                              var="r" 
                              id="tabela"
                              reflow="true"
@@ -31,24 +31,21 @@
                              resizableColumns="true"
                              >
                     <p:column width="70">
-                        <p:commandLink action="#{categoryController.show(r)}" 
+                        <p:commandLink action="#{paisController.show(r)}" 
                                        title="#{msg.alt}" >
                             <b:iconAwesome name="fa-edit" size="lg"/>
                         </p:commandLink>				 
-                        <p:commandLink action="#{categoryController.remove(r.id)}"
+                        <p:commandLink action="#{paisController.remove(r.id)}"
                                        title="#{msg.del}"
                                        style="margin-left:5px"> 
                             <b:iconAwesome name="fa-trash" size="lg"/>
                             <p:confirm header="Confirmação" message="Deseja prosseguir?" icon="ui-icon-alert" />
                         </p:commandLink>
                     </p:column>   		 
-                    <p:column headerText="Name">
-                        #{r.name}
+                    <p:column headerText="Nome">
+                        #{r.nome}
                     </p:column>
-                    <p:column headerText="Description">
-                        #{r.description}
-                    </p:column>
-
+             
                 </p:dataTable> 
             </h:form>
         </ui:define>

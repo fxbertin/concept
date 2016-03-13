@@ -10,74 +10,81 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import com.shadow.concept.models.Category;
+import org.primefaces.model.LazyDataModel;
 
 @SuppressWarnings("unchecked")
 public abstract class GenericController<T extends GenericEntity> implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Inject
-	private T entidade;
+    @Inject
+    private T entidade;
 
-	@Inject
-	protected GenericDAO<T> dao;
+    @Inject
+    protected GenericDAO<T> dao;
 
-	protected String formUrl, tableUrl;
+    protected String formUrl, tableUrl;
 
-	private List<T> list = new ArrayList<>();
+    private LazyDataModel<T> list;
 
-	@PostConstruct
-	private void postConstruct() {
-		Object object = FacesContext.getCurrentInstance().getExternalContext().getFlash().get("entity");
-		if (object != null)
-			setEntidade((T) object);
-		
-		setUrls();
-	}
+    @PostConstruct
+    private void postConstruct() {
+        Object object = FacesContext.getCurrentInstance().getExternalContext().getFlash().get("entity");
+        if (object != null) {
+            setEntidade((T) object);
+        }
 
-	private void setUrls() {
-		String className = Introspector.decapitalize(entidade.getClass().getSimpleName());
-		formUrl = String.format("/app/%sForm.xhtml?faces-redirect=true", className);
-		tableUrl = String.format("/app/%sList.xhtml?faces-redirect=true", className);
-	}
+        setUrls();
+    }
 
-	public String show(T t) {
-		FacesContext.getCurrentInstance().getExternalContext().getFlash().put("entity", t);
-		return formUrl;
-	}
+    private void setUrls() {
+        String className = Introspector.decapitalize(entidade.getClass().getSimpleName());
+        formUrl = String.format("/app/%sForm.xhtml?faces-redirect=true", className);
+        tableUrl = String.format("/app/%sList.xhtml?faces-redirect=true", className);
+    }
 
-	public String save() {
-		if (getEntidade().getId() == null)
-			dao.save(getEntidade());
-		else
-			dao.update(getEntidade());
-		return tableUrl;
-	}
+    public String show(T t) {
+        FacesContext.getCurrentInstance().getExternalContext().getFlash().put("entity", t);
+        return formUrl;
+    }
 
-	public String update() {
-		dao.update(getEntidade());
-		return formUrl;
-	}
+    public String save() {
+        if (getEntidade().getId() == null) {
+            dao.save(getEntidade());
+        } else {
+            dao.update(getEntidade());
+        }
+        return tableUrl;
+    }
 
-	public String remove(Long id) {
-		setEntidade(dao.getById(id));
-		dao.delete(getEntidade());
-		return tableUrl;
-	}
+    public String update() {
+        dao.update(getEntidade());
+        return formUrl;
+    }
 
-	public List<T> getList() {
-		return list;
-	}
+    public String remove(Long id) {
+        setEntidade(dao.getById(id));
+        dao.delete(getEntidade());
+        return tableUrl;
+    }
 
-	public void setList(List<T> list) {
-		this.list = list;
-	}
+    public LazyDataModel<T> getList() {
+        if (list == null) {
+            list = new GenericLazyDataModel<T>(dao);
+        }
 
-	public T getEntidade() {
-		return entidade;
-	}
+        return list;
+    }
 
-	public void setEntidade(T entidade) {
-		this.entidade = entidade;
-	}
+    public void setList(LazyDataModel<T> list) {
+        this.list = list;
+    }
+
+    public T getEntidade() {
+        return entidade;
+    }
+
+    public void setEntidade(T entidade) {
+        this.entidade = entidade;
+    }
 }
