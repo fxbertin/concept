@@ -20,10 +20,15 @@
 			    <b:navbarLinks>
 			        <b:dropMenu value="Cadastro">
 			            <b:navLink value="Usuário" href="#{request.contextPath}/app/register.xhtml"/>
+			            <b:dropMenu value="Localidade">
+			            	<b:navLink value="País" href="#{request.contextPath}/app/paisList.xhtml"/>
+			            	<b:navLink value="Estado" href="#{request.contextPath}/app/estadoList.xhtml"/>
+			            	<b:navLink value="Município" href="#{request.contextPath}/app/municipioList.xhtml"/>	
+			            </b:dropMenu>
 			            <b:navLink value="Entidade" href="#{request.contextPath}/app/entidadeList.xhtml"/>
 			            <b:navLink value="Product" href="#{request.contextPath}/app/productList.xhtml"/>
 			            <b:navLink value="Category" href="#{request.contextPath}/app/categoryList.xhtml"/>
-			       			<b:navCommandLink value="Logout" action="#{logout.submit}"/>
+			       		<b:navCommandLink value="Logout" action="#{logout.submit}"/>
 			        </b:dropMenu>
 			    </b:navbarLinks>
 			</b:navBar>

@@ -7,6 +7,7 @@ package com.shadow.concept.models;
 
 import com.shadow.concept.generics.GenericEntity;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
@@ -19,6 +20,16 @@ public class Estado extends GenericEntity {
     private String sigla;
     @NotBlank
     private String nome;
+    @ManyToOne
+    private Pais pais;
+
+    public Pais getPais() {
+        return pais;
+    }
+
+    public void setPais(Pais pais) {
+        this.pais = pais;
+    }
 
     public String getSigla() {
         return sigla;

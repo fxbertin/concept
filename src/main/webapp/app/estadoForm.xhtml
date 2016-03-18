@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"> 
+
+    <ui:composition template="/shared/crud-template.xhtml">
+        <ui:define name="body">
+            <h:form>
+                <div class="ui-fluid">
+                    <div class="ui-grid ui-grid-responsive">
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-12">
+                                <p:messages />
+                            </div>
+                        </div>    
+                        <div class="ui-grid-row">
+                        	<div class="ui-grid-col-2">
+                                <p:outputLabel for="sigla" value="Sigla"/> <br/>
+                                <p:inputText id="sigla" value="#{estadoController.entidade.sigla}" />
+                            </div>
+                        
+                            <div class="ui-grid-col-10">
+                                <p:outputLabel for="name" value="Name"/> <br/>
+                                <p:inputText id="name" value="#{estadoController.entidade.nome}" />
+                            </div>
+                        </div>
+
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-12">
+                                <p:outputLabel for="category" value="Category"/> <br />
+                                <p:selectOneMenu id="category"
+                                                 value="#{estadoController.entidade.pais}">
+                                    <f:converter converterId="entityConverter"/>
+                                    <f:selectItem noSelectionOption="true"/>
+                                    <f:selectItems value="#{estadoController.paises}"
+                                                   var="x"
+                                                   itemValue="#{x}"
+                                                   itemLabel="#{x.nome}"	/>
+                                </p:selectOneMenu>
+                            </div>
+                        </div>
+
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-2">
+                                <p:commandButton value="#{msg.salvar}" 
+                                                 action="#{estadoController.save()}"
+                                                 update="@form"
+                                                 icon="fa fa-fw fa-check"/> 
+                            </div>
+                            <div class="ui-grid-col-2">
+                                <p:button value="#{msg.cancelar}" 
+                                          outcome="/app/estadoList.xhtml?faces-redirect=true"
+                                          icon="fa fa-fw fa-close"/> 
+                            </div>
+                        </div>				    
+                    </div>
+                </div>	
+            </h:form>	
+        </ui:define> 
+    </ui:composition>
+</html>
